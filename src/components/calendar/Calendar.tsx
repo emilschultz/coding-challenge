@@ -1,5 +1,6 @@
 import { DateRange } from 'react-date-range';
 import { useState } from 'react';
+import WeatherStatus from '../weatherStatus/weatherStatus';
 import 'react-date-range/dist/styles.css';
 import 'react-date-range/dist/theme/default.css';
 import styles from './calendar.module.css';
@@ -38,6 +39,14 @@ export default function Calendar() {
   return (
     <>
       <div className={styles.calendar}>
+        <div className={styles.weather}>
+          <WeatherStatus
+            dateRange={{
+              startDate: range[0].startDate.toISOString(),
+              endDate: lastEndDate,
+            }}
+          />
+        </div>
         <div>
           <DateRange
             className={styles.wrap}
