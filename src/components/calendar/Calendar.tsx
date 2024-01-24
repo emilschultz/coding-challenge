@@ -1,6 +1,6 @@
 import { DateRange } from 'react-date-range';
 import { useState } from 'react';
-import WeatherStatus from '../weatherStatus/weatherStatus';
+import WeatherStatus from '../weatherStatus/WeatherStatus';
 import 'react-date-range/dist/styles.css';
 import 'react-date-range/dist/theme/default.css';
 import styles from './calendar.module.css';
@@ -15,24 +15,24 @@ interface NewRange {
 export default function Calendar() {
   const [range, setRange] = useState<NewRange[]>([
     {
-      startDate: new Date(),
-      endDate: new Date(),
+      startDate: new Date('2024-01-19'),
+      endDate: new Date('2024-01-24'),
       key: 'selection',
       color: '#d04e4a',
     },
   ]);
 
-  const handleDateChange = (dateItems: { selection?: NewRange }) => {
+  const dateSelection = (dateItems: { selection?: NewRange }) => {
     if (
       dateItems.selection &&
       dateItems.selection.startDate &&
       dateItems.selection.endDate
     ) {
       setRange([dateItems.selection]);
-      console.log(range[0]);
     }
   };
 
+  // For weather
   const lastDateInRange = range.length - 1;
   const lastEndDate = range[lastDateInRange].endDate.toISOString();
 
@@ -50,7 +50,7 @@ export default function Calendar() {
         <div>
           <DateRange
             className={styles.wrap}
-            onChange={handleDateChange}
+            onChange={dateSelection}
             moveRangeOnFirstSelection={false}
             ranges={range}
             months={1}
